@@ -115,3 +115,16 @@ Test FDE_48s: 12.659514427185059 ------ Test ADE: 8.563031196594238
 Thanks for the framework provided by `Marchetz/MANTRA-CVPR20`, which is source code of the published work MANTRA in CVPR-2020. The github repo is [MANTRA code](https://github.com/Marchetz/MANTRA-CVPR20). We borrow the framework and interface from the code.
 
 We also thank for the pre-processed data provided by the works of PECNet ([paper](https://link.springer.com/chapter/10.1007%2F978-3-030-58536-5_45),[code](https://github.com/j2k0618/PECNet_nuScenes)).
+
+## Citation
+
+If you use this code, please cite our paper:
+
+```
+@InProceedings{MemoNet_2022_CVPR,
+author = {Xu, Chenxin and Mao, Weibo and Zhang, Wenjun and Chen, Siheng},
+title = {Remember Intentions: Retrospective-Memory-based Trajectory Prediction},
+booktitle = {The IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)},
+year = {2022}
+}
+```
