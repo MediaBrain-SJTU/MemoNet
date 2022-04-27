@@ -90,6 +90,11 @@ class Trainer:
                     minValue = currentValue
                     print('min value: {}'.format(minValue))
                     torch.save(self.mem_n2n, self.folder_test + 'model_ae_' + self.name_test)
+        if self.config.mode == 'intention':
+            # Generate memory banks.
+            model_pretrain_intention = torch.load(self.folder_test + 'model_ae_' + self.name_test)
+            self.mem_n2n.load_state_dict(model_pretrain_intention.state_dict())
+            self.mem_n2n.generate_memory(self.train_dataset, filter_memory=True, threshold_distance=0.5)
 
 
     def AttentionLoss(self, sim, distance):
