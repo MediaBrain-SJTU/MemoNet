@@ -205,7 +205,7 @@ class model_encdec(nn.Module):
         return batch_c
 
 
-    def generate_memory(self, train_dataset, filter_memory=False):
+    def generate_memory(self, train_dataset, filter_memory=False, threshold_distance=0.5):
         
         self.memory_past = torch.Tensor().cuda()
         self.memory_fut = torch.Tensor().cuda()
@@ -236,19 +236,17 @@ class model_encdec(nn.Module):
         # print(self.memory_past.size())
         if filter_memory:
             index = [0]
-            t_p = t_f = 0.5
+            t_p = t_f = threshold_distance
             destination_memory = self.memory_dest[0:1]
             start_memory = self.memory_start[0:1]
             num_sample = self.memory_dest.shape[0]
-            threshold_past = self.t_p
-            threshold_futu = self.t_f
             for i in range(1, num_sample):
                 memory_size = destination_memory.shape[0]
                 distances = torch.norm(destination_memory - self.memory_dest[i].unsqueeze(0).repeat(memory_size, 1), dim=1)
                 distances_start = torch.norm(start_memory - self.memory_start[i].unsqueeze(0).repeat(memory_size, 1), dim=1)
 
-                mask_destination = torch.where(distances-threshold_past<t_f, torch.ones_like(distances), torch.zeros_like(distances))
-                mask_start = torch.where(distances_start-threshold_futu<t_p, torch.ones_like(distances), torch.zeros_like(distances))
+                mask_destination = torch.where(distances<t_f, torch.ones_like(distances), torch.zeros_like(distances))
+                mask_start = torch.where(distances_start<t_p, torch.ones_like(distances), torch.zeros_like(distances))
 
                 mask = mask_destination + mask_start
                 min_distance = torch.max(mask).item()
