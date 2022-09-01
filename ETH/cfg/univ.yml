@@ -1,0 +1,62 @@
+# ------------------- General Options -------------------------
+
+description                  : MemoNet
+results_root_dir             : results
+seed                         : 1
+dataset                      : univ
+data_root_ethucy             : datasets/eth_ucy
+
+# ------------------- Feature Extractor -------------------------
+
+past_frames                  : 8
+future_frames                : 12
+min_past_frames              : 8
+min_future_frames            : 12
+
+traj_scale                   : 1
+motion_dim                   : 2
+forecast_dim                 : 2
+
+rotation                     : True
+scale:
+  use                        : True
+  threshold                  : 1.5
+  type                       : constant
+  value                      : 0.8
+
+
+# ------------------- Model -------------------------
+model_encdec                 : 'pretrain/univ/model.pt' 
+memory_path                  : 'pretrain/univ'
+cosine_num                   : 400
+selector_num                 : 370
+cluster_trajectory           : False
+mode                         : 'intention'
+# mode: ['intention', 'addressor_warm', 'addressor', 'trajectory']
+residual_prediction          : False
+num_decompose                : 2
+dim_embedding_key            : 64
+nmp_layers                   : 2
+input_query_w                : [256, 256]
+past_memory_w                : [256, 256] 
+# ------------------- Training Parameters -------------------------
+
+lr                           : 1.e-3
+loss_cfg:
+  mse:
+    weight: 1.0
+  kld:
+    weight: 1.0
+    min_clip: 2.0
+  sample:
+    weight: 1.0
+    k: 20
+cuda                         : True
+num_epochs                   : 100
+lr_fix_epochs                : 10
+lr_scheduler: 'step'
+decay_step: 10
+decay_gamma: 0.5
+print_freq                   : 20
+model_save_freq              : 10
+

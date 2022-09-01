@@ -1,0 +1,51 @@
+# ------------------- General Options -------------------------
+
+description                  : MemoNet
+results_root_dir             : results
+seed                         : 1
+dataset                      : eth
+data_root_ethucy             : datasets/eth_ucy
+
+# ------------------- Feature Extractor -------------------------
+
+past_frames                  : 8
+future_frames                : 12
+min_past_frames              : 8
+min_future_frames            : 12
+
+traj_scale                   : 1
+motion_dim                   : 2
+forecast_dim                 : 2
+
+rotation                     : True
+scale:
+  use                        : True
+  threshold                  : 1.3
+  type                       : divide
+  large                      : 1.2
+
+
+# ------------------- Model -------------------------
+model_encdec                 : 'pretrain/eth/model.pt' 
+model_encdec_rep             : 'pretrain/eth/model.pt'  # model path for reproduce
+memory_path                  : 'pretrain/eth'
+cosine_num                   : 250
+selector_num                 : 245
+cluster_trajectory           : True
+mode                         : 'trajectory'
+# modes: ['intention', 'addressor_warm', 'addressor', 'trajectory']
+residual_prediction          : False
+num_decompose                : 2
+dim_embedding_key            : 64
+nmp_layers                   : 2
+input_query_w                : [256, 256]
+past_memory_w                : [256, 256] 
+
+
+# ------------------- Training Parameters -------------------------
+
+lr                           : 5.e-4
+cuda                         : True
+num_epochs                   : 100
+model_save_freq              : 1
+
