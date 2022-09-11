@@ -17,6 +17,10 @@ Below is an example of prediction interpretability where the first column stands
 ![system design](./imgs/interpretability.png)
 
 
+## [2022/09] Update: ETH's code & model is available!
+
+You can find the code and the instructions in the **ETH** folder.
+
 ## Installation
 
 ### Environment
